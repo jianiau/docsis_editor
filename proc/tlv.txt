@@ -1,0 +1,402 @@
+1	0	0	int	4	Downstream Frequency
+2	0	0	int	1	Upstream Channel ID
+3	0	0	bool	1	Network Access Control Object
+4	0	0	oooo	n	DOCSIS 1.0 Class of Service
+4	1	0	int	1	Class ID
+4	2	0	int	4	Maximum Downstream Rate
+4	3	0	int	4	Maximum Upstream Rate
+4	4	0	int	1	Upstream Channel Priority
+4	5	0	int	4	Guaranteed Minimum Upstream Channel Data Rate
+4	6	0	int	2	Maximum Upstream Channel Transmit Burst
+4	7	0	bool	1	Class of Service Privacy Enable
+6	0	0	octet	16	CM Message Integrity Check (MIC)
+7	0	0	octet	16	CMTS Message Integrity Check (MIC)
+9	0	0	text	n	SW Upgrade Filename
+10	0	0	tlv10	n	SNMP Write Access Control
+11	0	0	snmp	n	SNMP MIB Object
+14	0	0	octet	6	CPE Ethernet MAC Address
+#15	0	0	oooo		Telephone Settings Option (deprecated)
+17	0	0	oooo	n	Baseline Privacy
+17	1	0	int	4	Authorize Wait Timeout
+17	2	0	int	4	Reauthorize Wait Timeout
+17	3	0	int	4	Authorization Grace Time
+17	4	0	int	4	Operational Wait Timeout
+17	5	0	int	4	Rekey Wait Timeout
+17	6	0	int	4	TEK Grace Time
+17	7	0	int	4	Authorize Reject Wait Timeout
+17	8	0	int	4	SA Map Wait Timeout
+17	9	0	int	4	SA Map Max Retries
+18	0	0	int	1	Max Number of CPEs
+19	0	0	time	4	TFTP Server Timestamp
+20	0	0	ipv4	4	TFTP Server Provisioned Modem IPv4 Address
+21	0	0	ipv4	4	SW Upgrade IPv4 TFTP Server
+22	0	0	oooo	n	Upstream Packet Classification
+22	1	0	int	1	Classifier Reference
+22	2	0	int	2	Classifier Identifier
+22	3	0	int	2	Service Flow Reference
+22	4	0	int	4	Service Flow Identifier
+22	5	0	int	1	Rule Priority
+22	6	0	bool	1	Classifier Activation State
+22	7	0	int	1	Dynamic Service Change Action
+#22	8	0	oooo	x	Classifier Error Encodings
+#22	8	1	oooo	x	Errored Parameter
+#22	8	2	oooo	x	Error Code
+#22	8	3	oooo	x	Error Message
+22	9	0	oooo	n	IPv4 Packet Classification Encodings
+22	9	1	octet	3	IPv4 Type of Service Range and Mask
+22	9	2	int	2	IP Protocol
+22	9	3	ipv4	4	IPv4 Source Address
+22	9	4	ipv4	4	IPv4 Source Mask
+22	9	5	ipv4	4	IPv4 Destination Address
+22	9	6	ipv4	4	IPv4 Destination Mask
+22	9	7	int	2	TCP/UDP Source Port Start
+22	9	8	int	2	TCP/UDP Source Port End
+22	9	9	int	2	TCP/UDP Destination Port Start
+22	9	10	int	2	TCP/UDP Destination Port End
+22	10	0	oooo	n	Ethernet LLC Packet Classification Encodings
+22	10	1	octet	12	Destination MAC Address
+22	10	2	octet	6	Source MAC Address
+22	10	3	octet	3	Ethertype/DSAP/Mac Type
+22	11	0	oooo	n	IEEE 802.1P/Q Packet Classification Encodings
+22	11	1	int	2	IEEE 802.1P User Priority
+22	11	2	int	2	IEEE 802.1Q VLAN_ID
+22	12	0	oooo	n	IPv6 Packet Classification Encodings
+22	12	1	octet	3	IPv6 Traffic Class
+22	12	2	octet	4	IPv6 Flow Label
+22	12	3	octet	2	IPv6 Next Header Type
+22	12	4	ipv6	16	IPv6 Source Address
+22	12	5	int	1	IPv6 Source Prefix Length (bits)
+22	12	6	ipv6	16	IPv6 Destination Address
+22	12	7	int	1	IPv6 Destination Prefix Length (bits)
+22	13	0	oooo	n	CM Interface Mask (CMIM)
+22	14	0	oooo	n	IEEE 802.1ad S-VLAN Packet Classification Encodings
+22	14	1	oooo	2	IEEE 802.1ad S-TPID
+22	14	2	oooo	2	IEEE 802.1ad S-VID
+22	14	3	oooo	1	IEEE 802.1ad S-PCP
+22	14	4	oooo	1	IEEE 802.1ad S-DEI
+22	14	5	oooo	2	IEEE 802.1ad C-TPID
+22	14	6	oooo	2	IEEE 802.1ad C-VID
+22	14	7	oooo	1	IEEE 802.1ad C-PCP
+22	14	8	oooo	1	IEEE 802.1ad C-CFI
+22	14	9	oooo	4	IEEE 802.1ad S-TCI
+22	14	10	oooo	4	IEEE 802.1ad C-TCI
+22	15	0	oooo	n	IEEE 802.1ah I-TAG Packet Classification Encodings
+22	15	1	oooo	2	IEEE 802.1ah I-TPID
+22	15	2	oooo	3	IEEE 802.1ah I-SID
+22	15	3	oooo	5	IEEE 802.1ah I-TCI
+22	15	4	oooo	1	IEEE 802.1ah I-PCP
+22	15	5	oooo	1	IEEE 802.1ah I-DEI
+22	15	6	oooo	1	IEEE 802.1ah I-UCA
+22	15	7	oooo	2	IEEE 802.1ah B-TPID
+22	15	8	oooo	4	IEEE 802.1ah B-TCI
+22	15	9	oooo	1	IEEE 802.1ah B-PCP
+22	15	10	oooo	1	IEEE 802.1ah B-DEI
+22	15	11	oooo	2	IEEE 802.1ah B-VID
+22	15	12	oooo	6	IEEE 802.1ah B-DA
+22	15	13	oooo	6	IEEE 802.1ah B-SA
+22	16	0	oooo	n	ICMPv4/ICMPv6 Packet Classification Encodings
+22	16	1	octet	1	ICMPv4/ICMPv6 Type Start
+22	16	2	octet	1	ICMPv4/ICMPv6 Type End
+22	17	0	oooo	n	MPLS Classification Encodings
+22	17	1	oooo	1	MPLS TC bits
+22	17	2	oooo	3	MPLS Label
+22	43	0	oooo	n	Vendor Specific Classifier Parameters
+23	0	0	oooo	n	Downstream Packet Classification
+23	1	0	int	1	Classifier Reference
+23	2	0	int	2	Classifier Identifier
+23	3	0	int	2	Service Flow Reference
+23	4	0	int	4	Service Flow Identifier
+23	5	0	int	1	Rule Priority
+23	6	0	bool	1	Classifier Activation State
+23	7	0	int	1	Dynamic Service Change Action
+#23	8	0	oooo	x	Classifier Error Encodings
+#23	8	1	oooo	x	Errored Parameter
+#23	8	2	oooo	x	Error Code
+#23	8	3	oooo	x	Error Message
+23	9	0	oooo	n	IPv4 Packet Classification Encodings
+23	9	1	octet	3	IPv4 Type of Service Range and Mask
+23	9	2	int	2	IP Protocol
+23	9	3	ipv4	4	IPv4 Source Address
+23	9	4	ipv4	4	IPv4 Source Mask
+23	9	5	ipv4	4	IPv4 Destination Address
+23	9	6	ipv4	4	IPv4 Destination Mask
+23	9	7	int	2	TCP/UDP Source Port Start
+23	9	8	int	2	TCP/UDP Source Port End
+23	9	9	int	2	TCP/UDP Destination Port Start
+23	9	10	int	2	TCP/UDP Destination Port End
+23	10	0	oooo	n	Ethernet LLC Packet Classification Encodings
+23	10	1	octet	12	Destination MAC Address
+23	10	2	octet	6	Source MAC Address
+23	10	3	octet	3	Ethertype/DSAP/Mac Type
+23	11	0	oooo	n	IEEE 802.1P/Q Packet Classification Encodings
+23	11	1	int	2	IEEE 802.1P User Priority
+23	11	2	int	2	IEEE 802.1Q VLAN_ID
+23	12	0	oooo	n	IPv6 Packet Classification Encodings
+23	12	1	octet	3	IPv6 Traffic Class
+23	12	2	octet	4	IPv6 Flow Label
+23	12	3	octet	2	IPv6 Next Header Type
+23	12	4	ipv6	16	IPv6 Source Address
+23	12	5	int	1	IPv6 Source Prefix Length (bits)
+23	12	6	ipv6	16	IPv6 Destination Address
+23	12	7	int	1	IPv6 Destination Prefix Length (bits)
+23	14	0	oooo	n	IEEE 802.1ad S-VLAN Packet Classification Encodings
+23	14	1	oooo	2	IEEE 802.1ad S-TPID
+23	14	2	oooo	2	IEEE 802.1ad S-VID
+23	14	3	oooo	1	IEEE 802.1ad S-PCP
+23	14	4	oooo	1	IEEE 802.1ad S-DEI
+23	14	5	oooo	2	IEEE 802.1ad C-TPID
+23	14	6	oooo	2	IEEE 802.1ad C-VID
+23	14	7	oooo	1	IEEE 802.1ad C-PCP
+23	14	8	oooo	1	IEEE 802.1ad C-CFI
+23	14	9	oooo	4	IEEE 802.1ad S-TCI
+23	14	10	oooo	4	IEEE 802.1ad C-TCI
+23	15	0	oooo	n	IEEE 802.1ah I-TAG Packet Classification Encodings
+23	15	1	oooo	2	IEEE 802.1ah I-TPID
+23	15	2	oooo	3	IEEE 802.1ah I-SID
+23	15	3	oooo	5	IEEE 802.1ah I-TCI
+23	15	4	oooo	1	IEEE 802.1ah I-PCP
+23	15	5	oooo	1	IEEE 802.1ah I-DEI
+23	15	6	oooo	1	IEEE 802.1ah I-UCA
+23	15	7	oooo	2	IEEE 802.1ah B-TPID
+23	15	8	oooo	4	IEEE 802.1ah B-TCI
+23	15	9	oooo	1	IEEE 802.1ah B-PCP
+23	15	10	oooo	1	IEEE 802.1ah B-DEI
+23	15	11	oooo	2	IEEE 802.1ah B-VID
+23	15	12	oooo	6	IEEE 802.1ah B-DA
+23	15	13	oooo	6	IEEE 802.1ah B-SA
+23	16	0	oooo	n	ICMPv4/ICMPv6 Packet Classification Encodings
+23	16	1	octet	1	ICMPv4/ICMPv6 Type Start
+23	16	2	octet	1	ICMPv4/ICMPv6 Type End
+23	17	0	oooo	n	MPLS Classification Encodings
+23	17	1	oooo	1	MPLS TC bits
+23	17	2	oooo	3	MPLS Label
+23	43	0	oooo	n	Vendor Specific Classifier Parameters
+24	0	0	oooo	n	Upstream Service Flow
+24	1	0	int	2	Service Flow Reference
+# 24	2	0	int	4	Nominal Grant Interval
+# 24	3	0	int	2	Service Identifier
+24	4	0	textnull	2-16	Service Class Name
+# 24	5	0	oooo	n	Service Flow Error Encodings
+# 24	5	1	oooo	x	Errored Parameter
+# 24	5	2	oooo	x	Error Code
+# 24	5	3	oooo	x	Error Message
+24	6	0	int	1	Quality of Service Parameter Set Type
+24	7	0	int	1	Traffic Priority
+24	8	0	int	4	Upstream Maximum Sustained Traffic Rate
+24	9	0	int	4	Maximum Traffic Burst
+24	10	0	int	4	Minimum Reserved Traffic Rate
+24	11	0	int	2	Assumed Minimum Reserved Rate Packet Size
+24	12	0	int	2	Timeout for Active QoS Parameters
+24	13	0	int	2	Timeout for Admitted QoS Parameters
+24	14	0	int	2	Maximum Concatenated Burst
+24	15	0	int	1	Service Flow Scheduling Type
+24	16	0	octet	4	Request/Transmission Policy
+24	17	0	int	4	Nominal Polling Interval
+24	18	0	int	4	Tolerated Poll Jitter
+24	19	0	int	2	Unsolicited Grant Size
+24	20	0	int	4	Nominal Grant Interval 
+24	21	0	int	4	Tolerated Grant Jitter
+24	22	0	int	1	Grants per Interval
+24	23	0	octet	2	IP Type Of Service (DSCP) Overwrite
+24	24	0	int	4	Unsolicited Grant Time Reference
+24	25	0	int	1	Multiplier to Contention Request Backoff Window
+24	26	0	int	1	Multiplier to Number of Bytes Requested
+24	27	0	int	4	Peak Traffic Rate
+24	31	0	oooo	4	Service Flow Required Attribute Mask
+24	32	0	oooo	4	Service Flow Forbidden Attribute Mask
+24	33	0	oooo	4	Service Flow Attribute Aggregation Rule Mask
+24	34	0	oooo	4	Application Identifier
+24	43	0	oooo	n	Vendor Specific QoS Parameters
+25	0	0	oooo	n	Downstream Service Flow
+25	1	0	int	2	Service Flow Reference
+# 25	2	0	int	4	Service Flow Identifier
+# 25	3	0	int	2	Service Identifier
+25	4	0	textnull	2-16	Service Class Name
+# 25	5	0	oooo	x	Service Flow Error Encodings
+# 25	5	1	oooo	x	Errored Parameter
+# 25	5	2	oooo	x	Error Code
+# 25	5	3	oooo	x	Error Message
+25	6	0	int	1	Quality of Service Parameter Set Type
+25	7	0	int	1	Traffic Priority
+25	8	0	int	4	Downstream Maximum Sustained Traffic Rate
+25	9	0	int	4	Maximum Traffic Burst
+25	10	0	int	4	Minimum Reserved Traffic Rate
+25	11	0	oooo	2	Assumed Minimum Reserved Rate Packet Size
+25	12	0	oooo	2	Timeout for Active QoS Parameters
+25	13	0	oooo	2	Timeout for Admitted QoS Parameters
+25	14	0	int	4	Maximum Downstream Latency
+#25	15	0	oooo	x	Reserved
+25	17	0	bool	1	Downstream Resequencing
+25	23	0	octet	2	IP Type Of Service (DSCP) Overwrite
+25	27	0	int	4	Peak Traffic Rate
+25	31	0	oooo	4	Service Flow Required Attribute Mask
+25	32	0	oooo	4	Service Flow Forbidden Attribute Mask
+25	33	0	oooo	4	Service Flow Attribute Aggregation Rule Mask
+25	34	0	oooo	4	Application Identifier
+25	43	0	oooo	n	Vendor Specific QoS Parameters
+26	0	0	oooo	x	Payload Header Suppression
+26	1	0	oooo	x	Payload Header Suppression Size (PSSS)
+26	1	0	oooo	x	Payload Header Suppression Size (PSSS)
+26	2	0	oooo	n	Classifier Identifier
+26	3	0	oooo	x	Service Flow Reference
+26	4	0	oooo	x	Service Flow Identifier
+26	7	0	oooo	x	Payload Header Suppression Field (PHSF)
+26	8	0	oooo	x	Payload Header Suppression Index (PHSI)
+26	9	0	oooo	x	Payload Header Suppression Mask (PHSM)
+26	11	0	oooo	x	Payload Header Suppression Verification (PHSV)
+26	12	0	oooo	x	Reserved
+26	43	0	oooo	x	Vendor Specific PHS Parameters
+28	0	0	int	2	Maximum Number of Classifiers
+29	0	0	bool	1	Privacy Enable
+32	0	0	cvc	n	Manufacturer Code Verification Certificate
+33	0	0	cvc	n	Co-Signer Code Verification Certificate
+34	0	0	oooo	n	SNMPv3 Kickstart Value
+34	1	0	text	x	SNMPv3 Kickstart Security Name
+34	2	0	oooo	x	SNMPv3 Kickstart Mgr Public Num.
+35	0	0	octet	3	Subscriber Mgmt Control
+36	0	0	ipv4_list	n	Subscriber Mgmt CPE IPv4 List
+37	0	0	octet	8	Subscriber Mgmt Filter Groups
+38	0	0	oooo	n	SNMPv3 Notification Receiver
+38	1	0	oooo	x	SNMPv3 Notification Rx IP Addr
+38	2	0	oooo	x	SNMPv3 Notification Rx UDP port
+38	3	0	oooo	x	SNMPv3 Notification Rx Trap Type
+38	4	0	oooo	x	SNMPv3 Notification Rx Timeout
+38	5	0	oooo	x	SNMPv3 Notification Rx Retries
+38	6	0	oooo	x	SNMPv3 Notification Rx Filtering Params
+38	7	0	oooo	x	SNMPv3 Notification Rx Security Name
+38	8	0	oooo	x	SNMPv3 Notification Receiver IPv6 Address
+39	0	0	bool	1	Enable 2.0 Mode
+40	0	0	bool	1	Enable Test Modes
+41	0	0	oooo	n	Downstream Channel List
+41	1	0	oooo	6,10	Single DS Channel
+41	1	1	int	2	Single DS Chan Timeout
+41	1	2	int	4	Single DS Chan Frequency
+41	2	0	int	18,22	DS Frequency Range
+41	2	1	int	2	DS Freq. Range Timeout
+41	2	2	int	4	DS Frequency Range Start
+41	2	3	int	4	DS Frequency Range End
+41	2	4	int	2	DS Frequency Range Step Size
+41	3	0	oooo	x	Default Scanning
+42	0	0	octet	6	Static Multicast MAC Address
+43	0	0	oooo	n	DOCSIS Extension Field/ (Vendor-Specific Vendor Encoding in 1.0)
+43	1	0	oooo	x	IP Multicast Join Authorization
+43	1	0	oooo	x	IP Multicast Join Authorization
+43	2	0	oooo	x	CM Load Balancing Priority
+43	3	0	oooo	x	CM Load Balancing Group ID
+43	4	0	oooo	x	CM Ranging Class ID Extension
+43	5	0	oooo	x	L2VPN Encoding
+43	6	0	oooo	x	Extended CMTS MIC config
+43	6	1	oooo	x	Extended CMTS MIC HMAC type
+43	6	2	oooo	x	Extended CMTS MIC Bitmap
+43	6	3	oooo	x	Explicit Extended CMTS MIC Digest Subtype
+43	7	0	oooo	x	SAV Authorization Encoding
+43	7	1	oooo	x	SAV Group Name
+43	7	2	oooo	x	SAV Static Prefix
+43	8	0	oooo	3	Reserved for Vendor ID Encoding (TLV 8)
+43	9	0	oooo	x	CM Attribute Masks
+43	9	1	oooo	x	CM Required Downstream Attribute Mask
+43	9	2	oooo	x	CM Downstream Forbidden Attribute Mask
+43	9	3	oooo	x	CM Upstream Required Attribute Mask
+43	9	4	oooo	x	CM Upstream Forbidden Attribute Mask
+43	11	0	oooo	x	Service Type identifier
+45	0	0	oooo	n	Downstream Unencrypted Traffic (DUT) Filtering
+53	0	0	oooo	n	SNMPv1v2c Coexistence
+53	1	0	text	1-32	SNMPv1v2c Community Name
+53	2	0	oooo	n	SNMPv1v2c Transport Address Access
+53	2	1	ip/port	6,18	SNMPv1v2c Transport Address
+53	2	2	ip/port	6,18	SNMPv1v2c Transport Address Mask
+53	3	0	int	1	SNMPv1v2c Access View Type
+53	4	0	text	1-32	SNMPv1v2c Access View Name
+54	0	0	oooo	n	SNMPv3 Access View
+54	1	0	text	1-32	SNMPv3 Access View Name
+54	2	0	oid	n	SNMPv3 Access View Subtree
+54	3	0	bits	0-16	SNMPv3 Access View Mask
+54	4	0	int	1	SNMPv3 Access View Type
+55	0	0	bool	1	SNMP CPE Access Control
+56	0	0	oooo	n	Channel Assignment Configuration Settings
+56	1	0	int	1	Transmit Channel Assignment
+56	2	0	int	4	Receive Channel Assignment
+58	0	0	ipv6	16	Software Upgrade IPv6 TFTP Server
+59	0	0	ipv6	16	TFTP Server Provisioned Modem IPv6 Address
+60	0	0	oooo	n	Upstream Drop Packet Classification
+60	1	0	oooo	x	Classifier Reference
+60	2	0	oooo	x	Classifier Identifier
+60	5	0	oooo	x	Rule Priority
+60	7	0	int	1	Dynamic Service Change Action
+#60	8	0	oooo	x	Classifier Error Encodings
+#60	8	1	oooo	x	Errored Parameter
+#60	8	2	oooo	x	Error Code
+#60	8	3	oooo	x	Error Message
+60	9	0	oooo	n	IPv4 Packet Classification Encodings
+60	9	1	octet	3	IPv4 Type of Service Range and Mask
+60	9	2	int	2	IP Protocol
+60	9	3	ipv4	4	IPv4 Source Address
+60	9	4	ipv4	4	IPv4 Source Mask
+60	9	5	ipv4	4	IPv4 Destination Address
+60	9	6	ipv4	4	IPv4 Destination Mask
+60	9	7	int	2	TCP/UDP Source Port Start
+60	9	8	int	2	TCP/UDP Source Port End
+60	9	9	int	2	TCP/UDP Destination Port Start
+60	9	10	int	2	TCP/UDP Destination Port End
+60	10	0	oooo	n	Ethernet LLC Packet Classification Encodings
+60	10	1	octet	12	Destination MAC Address
+60	10	2	octet	6	Source MAC Address
+60	10	3	octet	3	Ethertype/DSAP/Mac Type
+60	11	0	oooo	n	IEEE 802.1P/Q Packet Classification Encodings
+60	11	1	int	2	IEEE 802.1P User Priority
+60	11	2	int	2	IEEE 802.1Q VLAN_ID
+60	12	0	oooo	n	IPv6 Packet Classification Encodings
+60	12	1	octet	3	IPv6 Traffic Class
+60	12	2	octet	4	IPv6 Flow Label
+60	12	3	octet	2	IPv6 Next Header Type
+60	12	4	ipv6	16	IPv6 Source Address
+60	12	5	int	1	IPv6 Source Prefix Length (bits)
+60	12	6	ipv6	16	IPv6 Destination Address
+60	12	7	int	1	IPv6 Destination Prefix Length (bits)
+60	13	0	oooo	x	CM Interface Mask (CMIM)
+60	14	0	oooo	n	IEEE 802.1ad S-VLAN Packet Classification Encodings
+60	14	1	oooo	2	IEEE 802.1ad S-TPID
+60	14	2	oooo	2	IEEE 802.1ad S-VID
+60	14	3	oooo	1	IEEE 802.1ad S-PCP
+60	14	4	oooo	1	IEEE 802.1ad S-DEI
+60	14	5	oooo	2	IEEE 802.1ad C-TPID
+60	14	6	oooo	2	IEEE 802.1ad C-VID
+60	14	7	oooo	1	IEEE 802.1ad C-PCP
+60	14	8	oooo	1	IEEE 802.1ad C-CFI
+60	14	9	oooo	4	IEEE 802.1ad S-TCI
+60	14	10	oooo	4	IEEE 802.1ad C-TCI
+60	15	0	oooo	n	IEEE 802.1ah I-TAG Packet Classification Encodings
+60	15	1	oooo	2	IEEE 802.1ah I-TPID
+60	15	2	oooo	3	IEEE 802.1ah I-SID
+60	15	3	oooo	5	IEEE 802.1ah I-TCI
+60	15	4	oooo	1	IEEE 802.1ah I-PCP
+60	15	5	oooo	1	IEEE 802.1ah I-DEI
+60	15	6	oooo	1	IEEE 802.1ah I-UCA
+60	15	7	oooo	2	IEEE 802.1ah B-TPID
+60	15	8	oooo	4	IEEE 802.1ah B-TCI
+60	15	9	oooo	1	IEEE 802.1ah B-PCP
+60	15	10	oooo	1	IEEE 802.1ah B-DEI
+60	15	11	oooo	2	IEEE 802.1ah B-VID
+60	15	12	oooo	6	IEEE 802.1ah B-DA
+60	15	13	oooo	6	IEEE 802.1ah B-SA
+60	16	0	oooo	n	ICMPv4/ICMPv6 Packet Classification Encodings
+60	16	1	octet	1	ICMPv4/ICMPv6 Type Start
+60	16	2	octet	1	ICMPv4/ICMPv6 Type End
+60	17	0	oooo	n	MPLS Classification Encodings
+60	17	1	oooo	1	MPLS TC bits
+60	17	2	oooo	3	MPLS Label
+60	43	0	oooo	n	Vendor Specific Classifier Parameters
+61	0	0	oooo	n	Subscriber Mgmt CPE IPv6 Prefix List
+62	0	0	oooo	n	Upstream Drop Classifier Group ID
+63	0	0	oooo	n	Subscriber Mgmt Control Max CPE IPv6 Prefix
+64	0	0	oooo	n	CMTS Static Multicast Session Encoding
+64	1	0	ip	4,16	Static Multicast Group Encoding
+64	2	0	ip	4,16	Static Multicast Source Encoding
+64	3	0	oooo	n	Static Multicast CMIM Encoding
+65	0	0	oooo	n	L2VPN MAC Aging Encoding
+66	0	0	oooo	n	Management Event Control Encoding
+67	0	0	ipv6_list	n	Subscriber Mgmt CPE IPv6 List
+68	0	0	int	2	Default Upstream Target Buffer Configuration
+69	0	0		n	MAC Address Learning Control 
+69	1	0	bool	1	 MAC Address Learning Control
+69	2	0	int	1	 MAC Address Learning Holdoff Timer 
