@@ -158,6 +158,20 @@ puts -------------
 			}
 			return 0
 		}
+		"textnull" {
+			set min 1
+			set max 254
+			regexp {(\d+)-(\d+)} $leng match min max
+			binary scan [binary format a* $::insert_v_val] H* hex
+			append hex 00			
+			set nleng [expr [string length $::insert_v_val] +1]
+			if {($nleng>=$min)&&($nleng<=$max)} {
+				set ntext $::insert_v_val
+				set ndata $hex
+				return 1
+			}
+			return 0
+		}
 		"int" {
 			if [catch {format %0[expr 2*$leng]x $::insert_v_val} new] {
 				# puts new=$new
@@ -263,6 +277,16 @@ proc format_value {type val} {
 		}
 		"text" {
 			binary scan $val a* ret
+		}
+		"textnull" {
+puts aaaaaaaaaaa		
+			if {[string range $val end end] == "\x00"} {				
+				binary scan [string range $val 0 end-1] a* ret
+puts 111ret=$ret				
+			} else {
+				binary scan $val a* ret
+puts 222ret=$ret								
+			}			
 		}
 		"ipv4" {
 			binary scan $val H2H2H2H2 ip1 ip2 ip3 ip4
