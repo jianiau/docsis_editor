@@ -28,12 +28,6 @@ foreach tcl_file [glob -nocomplain -directory [file join $rootpath proc] -type {
 }
 
 update
-set width  [winfo width  .]
-set height [winfo height .]
-set x [expr int( ( [winfo screenwidth  .]-$width )*0.5)]
-set y [expr int( ( [winfo screenheight .]-$height)*0.5)]
-
-wm geometry . ${width}x${height}+$x+$y
 wm deiconify .
 set ::file_init_dir [pwd]
 set ::version 1.02

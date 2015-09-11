@@ -6,9 +6,18 @@ wm title . "DOCSIS Config Editor"
 wm minsize . 660 440
 wm resizable . 1 1
 
+#set width  [winfo width  .]
+#set height [winfo height .]
+set width  660
+set height 440
+set x [expr int( ( [winfo screenwidth  .]-$width )*0.5)]
+set y [expr int( ( [winfo screenheight .]-$height)*0.5)]
+. configure -menu .mbar
+wm geometry . ${width}x${height}+$x+$y
+
 # menu
 menu .mbar -tearoff 0
-. configure -menu .mbar
+#. configure -menu .mbar
 menu .mbar.file -tearoff 0
 menu .mbar.edit -tearoff 0
 menu .mbar.tool -tearoff 0
