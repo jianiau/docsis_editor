@@ -399,4 +399,6 @@
 68	0	0	int	2	Default Upstream Target Buffer Configuration
 69	0	0		n	MAC Address Learning Control 
 69	1	0	bool	1	 MAC Address Learning Control
-69	2	0	int	1	 MAC Address Learning Holdoff Timer 
+69	2	0	int	1	 MAC Address Learning Holdoff Timer
+81	0	0	cvcchain	n	Manufacturer CVC Chain
+82	0	0	cvcchain	n	Co-signer CVC Chain

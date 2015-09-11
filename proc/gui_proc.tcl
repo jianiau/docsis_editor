@@ -8,7 +8,7 @@ proc move {direction} {
 	set item [$TREE selection get]
 	set type [tree_get_type $item]
 	set cvc 0	
-	if {($type==32) || ($type==33)} {
+	if {($type==32) || ($type==33) || ($type==81)||($type==82) } {
 		foreach {top end} [get_cvc_index] {}
 		set cvc 1
 	}
@@ -22,13 +22,13 @@ proc move {direction} {
 		}				
 		set prev_type 999		
 		catch {set prev_type [tree_get_type $prev]}
-		if {($prev_type==32)||($prev_type==33)} {
+		if {($prev_type==32)||($prev_type==33) || ($prev_type==81)||($prev_type==82)} {
 			foreach {temp_top temp_end} [get_cvc_index $prev] {}
 			set prev [list $temp_top $temp_end]
 		}
 		set next_type 999
 		catch {set next_type [tree_get_type $next]}
-		if {($next_type==32)||($next_type==33)} {
+		if {($next_type==32)||($next_type==33)||($next_type==81)||($next_type==82)} {
 			foreach {temp_top temp_end} [get_cvc_index $next] {}
 			set next [list $temp_top $temp_end]
 		}
@@ -241,7 +241,9 @@ proc insert_bind {} {
 					set ::set_gui_type snmp
 				}
 				"32" -
-				"33" {
+				"33" -
+				"81" -
+				"82" {
 					grid $p.fr_f -row 3 -column 0 -sticky new -columnspan 1
 					set ::set_gui_type file
 				}
@@ -390,7 +392,23 @@ proc insert_gui_update {{mode edit}} {
 			}	
 		}		
 	}
-
+	
+	if {$t==81|| $t==82} {
+		if {$mode=="edit"} {			
+#			get_cvc_item
+			return
+		}
+		if {$mode=="insert"} {
+			set now [$TREE selection get]
+			set end [lindex [get_cvc_index] 1]
+			if {$now!=$end} {
+				$TREE selection add [lindex [get_cvc_index] 1]
+				$TREE selection anchor
+				$TREE selection clear $now
+			}	
+		}		
+	}
+	
 	# enable insert gui
 	insert_gui
 	# clear all data
@@ -645,7 +663,17 @@ proc insert {{mode insert}} {
 				set ::insert_f_val ""
 				return
 			}
-
+			
+			if {$sel_t==81 || $sel_t==82} {
+				if {$::insert_f_val==""} {return}
+				if {![file exist $::insert_f_val]} {return}	
+				add_cvc $sel_t -file $::insert_f_val $item				
+				wm withdraw $p
+				grab release $p
+				set ::insert_f_val ""
+				return
+			}
+			
 			set parent [$TREE item parent $item]
 			if {![info exist insert_type]} {return}
 			if {[get_value $insert_type ll vv dd]} {
@@ -737,7 +765,7 @@ proc next_delete_node {node} {
 	set del_list ""
 	if {$node==""} {return}
 	set type [tree_get_type $node]
-	if {($type==32)||($type==33)} {
+	if {($type==32)||($type==33)||($type==81)||($type==82)} {
 		foreach {top end} [get_cvc_index $node] {}
 		set node $end
 		for {set i $top} {$i<=$end} {incr i} {lappend del_list $i}
