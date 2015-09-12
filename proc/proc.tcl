@@ -386,6 +386,20 @@ proc get_cvc_item {} {
 	}
 }
 
+proc get_cvc_chain_item {} {
+	global TREE columnID
+	foreach {top end} [get_cvc_index] {}
+	set temp ""
+	for {set i $top} {$i<=$end} {incr i} {
+		append temp [$TREE item element cget $i $columnID elemText3 -data]
+	}
+	puts [string length $temp]===
+	if [catch {parse_cvc_chain [binary format H* $temp]} rrr] {
+		puts "decode cvc chain fail:$rrr"
+		catch {destroy .cvcchain}
+	}
+}
+
 proc Sleep {ms} {
 	after $ms {
 		set aa 1

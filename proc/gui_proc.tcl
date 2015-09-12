@@ -395,7 +395,7 @@ proc insert_gui_update {{mode edit}} {
 	
 	if {$t==81|| $t==82} {
 		if {$mode=="edit"} {			
-#			get_cvc_item
+			get_cvc_chain_item
 			return
 		}
 		if {$mode=="insert"} {
