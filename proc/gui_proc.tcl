@@ -944,14 +944,39 @@ proc quick_add_fw_upgrade {} {
 		set p7b_data [read $p7bfile]
 		close $p7bfile
 		foreach {ret cert_list} [p7b_get_cert p7b_data] {}
+puts cert_list=[lindex [lindex $cert_list 0] 0]
 		switch $ret {
 			"1" {
-				add_cvc 32 -data [lindex $cert_list 0]
+				foreach {pki cert_type} [lindex [lindex $cert_list 0] 0] {}
+				if {$pki=="legacy" && $cert_type=="mfg"} {
+					add_cvc 32 -data [lindex [lindex $cert_list 0] 1]
+				} else {
+					return
+				}
 				
 			}
 			"2" {
-				add_cvc 32 -data [lindex $cert_list 0]
-				add_cvc 33 -data [lindex $cert_list 1]
+				foreach {pki0 cert_type0} [lindex [lindex $cert_list 0] 0] {}
+				foreach {pki1 cert_type1} [lindex [lindex $cert_list 1] 0] {}
+				if {($pki0 != $pki1) || ($cert_type0==$cert_type1)} {return}
+				if {$pki0=="legacy"} {
+					if {$cert_type0=="mfg"} {
+						add_cvc 32 -data [lindex [lindex $cert_list 0] 1]
+						add_cvc 33 -data [lindex [lindex $cert_list 1] 1]
+					} else {
+						add_cvc 32 -data [lindex [lindex $cert_list 1] 1]
+						add_cvc 33 -data [lindex [lindex $cert_list 0] 1]
+					}					
+				} else {
+				    set certlist ""
+					lappend certlist [lindex [lindex $cert_list 0] 1]
+					lappend certlist [lindex [lindex $cert_list 1] 1]
+					set tlv81 [PKCS7_deg $certlist]
+					add_cvc 81 -data $tlv81
+				}
+				
+			}
+			"3" {
 			}
 		}		
 		

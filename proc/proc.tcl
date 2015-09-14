@@ -393,7 +393,6 @@ proc get_cvc_chain_item {} {
 	for {set i $top} {$i<=$end} {incr i} {
 		append temp [$TREE item element cget $i $columnID elemText3 -data]
 	}
-	puts [string length $temp]===
 	if [catch {parse_cvc_chain [binary format H* $temp]} rrr] {
 		puts "decode cvc chain fail:$rrr"
 		catch {destroy .cvcchain}

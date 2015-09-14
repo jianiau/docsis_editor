@@ -38,7 +38,8 @@ proc p7b_get_cert {data_var} {
 		set cert_list ""
 		while {[string length $certificates]>0} {
 			::asn::asnGetSequence certificates cert
-			lappend cert_list [::asn::asnSequence $cert]
+			set cert_info [get_cert_info [::asn::asnSequence $cert]]
+			lappend cert_list [list $cert_info [::asn::asnSequence $cert]]
 			incr cert_number
 		}
 	} re] {
@@ -305,8 +306,8 @@ proc parse_cvc_chain {data} {
 			set Extensions_OPTIONAL $tbsdata
 			append cvcinfo "\n"
 		}
-		::asn::asnGetContext SignedData contextNumber crl
-		::asn::asnGetSet SignedData signinfo
+		#::asn::asnGetContext SignedData contextNumber crl
+		#::asn::asnGetSet SignedData signinfo
 	} err] {
 		.cvcchain.log insert end "Get cvc info fail\n"
 		.cvcchain.log insert end "err=$err\n"
@@ -315,6 +316,7 @@ proc parse_cvc_chain {data} {
 	binary scan $::parse_cvc_raw H* hexdata
 	hexdump $hexdata ".cvcchain.fr.hex" "stdout"
 }
+
 proc gettime {data_var} {
 	upvar $data_var data
 	::asn::asnPeekTag data tag_var tagtype_var constr_var
@@ -326,6 +328,66 @@ proc gettime {data_var} {
 			::asn::asnGetGeneralizedTime data utc_var
 		}
 	}
-	puts utc_var=$utc_var
 	return $utc_var
 }
+
+proc get_cert_info {cert} {
+	set data $cert
+	::asn::asnGetSequence data cvcdata
+	::asn::asnGetSequence cvcdata tbsdata
+	::asn::asnGetContext tbsdata contextNumber version
+	# Serial Number
+	::asn::asnRetag tbsdata 4
+	::asn::asnGetOctetString tbsdata serial
+	#Signature
+	::asn::asnGetSequence tbsdata data
+	::asn::asnGetObjectIdentifier data signAlg
+	set signAlg [join $signAlg .]
+	::asn::asnGetSequence tbsdata Issuer
+	::asn::asnGetSequence tbsdata data
+	::asn::asnGetSequence tbsdata subject
+	while {[string length $subject]>0} {
+		set ret [get_attribute subject]
+		puts ret=$ret
+		regexp {O\s+=\s+(.+)} $ret match org_name
+	}
+	switch $signAlg {
+		"1.2.840.113549.1.1.5" {
+			set pki legacy
+		}
+		"1.2.840.113549.1.1.11" {
+			set pki new
+		}
+		"default" {
+			set pki unknow
+		}
+	}
+	if [regexp {^[A-F0-9]{8}$} $org_name] {
+		set cert_type mso
+	} elseif {$org_name == "CableLabs" } {
+		set cert_type cvcca
+	} else {
+		set cert_type mfg
+	}
+	puts "pki=$pki cert_type=$cert_type"
+	return [list $pki $cert_type]
+			
+}
+
+proc PKCS7_deg {certlist} {
+	set signdata ""
+	append signdata [::asn::asnInteger 1]
+	append signdata [::asn::asnSet]
+	append signdata [::asn::asnSequence [::asn::asnObjectIdentifier [list 1 2 840 113549 1 7 1]]]
+	set certs ""
+	foreach cert $certlist {
+		append certs $cert
+	}
+	append signdata [::asn::asnContextConstr 0 $certs]
+	append signdata [::asn::asnSet]
+	set signdata [::asn::asnSequence $signdata]
+	set signdata [::asn::asnContextConstr 0 $signdata]
+	set temp [::asn::asnObjectIdentifier [list 1 2 840 113549 1 7 2]]
+	return [::asn::asnSequence $temp $signdata] 
+}
+
