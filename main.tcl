@@ -14,17 +14,13 @@ package require tile
 package require md5
 package require asn
 package require ip
-
+package require tkdnd
 
 image create photo logo -file [file join $rootpath editor.png]
 wm iconphoto . -default logo
 
 foreach tcl_file [glob -nocomplain -directory [file join $rootpath proc] -type {f} *.tcl] {
-	if {[package vsatisfies [package present Tcl] 8.5.0]} {
-		source -encoding utf-8 $tcl_file
-	} else {
-		source $tcl_file
-	}
+	source $tcl_file
 }
 
 update

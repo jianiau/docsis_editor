@@ -796,13 +796,15 @@ proc next_delete_node {node} {
 # input: node (current selected item)
 # output: del_list (the items that will be deleted)
 #========================================================
-proc load_config {} {
-	global TREE columnID newtlvdata
-	set types {
-		{{cfg Files}   {.cfg}}
-		{{All Files}        *}
+proc load_config {{drag 0} {filename ""}} {
+	global TREE columnID newtlvdata	
+	if {! $drag} {
+		set types {
+			{{cfg Files}   {.cfg}}
+			{{All Files}        *}
+		}
+		set filename [tk_getOpenFile -filetypes $types -initialdir $::file_init_dir]
 	}
-	set filename [tk_getOpenFile -filetypes $types -initialdir $::file_init_dir]
 	if {$filename != ""} {
 		$TREE item element configure root $columnID elemText1 -text [file tail $filename]		
 		# .fr_l.t item delete 0 end
