@@ -168,7 +168,7 @@ proc loadtlvdata {} {
 	global tlvdata rootpath
 	set fd [open [file join $rootpath proc tlv.txt] r]
 	while {![eof $fd]} {
-		if [gets $fd line] {
+		if {[gets $fd line]>0} {
 			foreach {type child subtype val_type val_leng name} [split $line \t] {}
 			if [regexp # $type] {continue}
 			if {$subtype} {
