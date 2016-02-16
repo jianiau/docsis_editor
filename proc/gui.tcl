@@ -256,9 +256,11 @@ bind $TREE <Button-3> {
 	}
 }
 
+if {$::WITH_DND} {
 tkdnd::drop_target register $TREE DND_Files
 bind $TREE <<Drop:DND_Files>> {
 	if {[file exist %D] && [file readable %D]} {
 		load_config 1 %D
 	}
+}
 }

@@ -14,10 +14,19 @@ package require tile
 package require md5
 package require asn
 package require ip
-package require tkdnd
+if [catch {package require tkdnd}] {
+  set ::WITH_DND 0
+} else {
+  set ::WITH_DND 1
+}
+
 package require netsnmptcl
 
-snmp_loadmib -mall -M$env(MIBDIRS)
+if [info exist env(MIBDIRS)] {
+	snmp_loadmib -mall -M$env(MIBDIRS)
+} else {
+	snmp_loadmib -mall -M [file join $rootpath mibs]
+}
 
 image create photo logo -file [file join $rootpath editor.png]
 wm iconphoto . -default logo
