@@ -532,7 +532,7 @@ proc insert_gui_update {{mode edit}} {
 					set ind [lsearch $tlvdata($t.$c,subtypes) $s]
 					ttk::combobox::SelectEntry $p.fr_t.cb_subtype $ind
 				}
-				insert_value_update $value
+				insert_value_update $value $raw_value
 			} else {
 				if [info exist tlvdata($t,name)] {
 					set ind [lsearch $tlvdata(types) $t]
@@ -562,16 +562,20 @@ proc insert_gui_update {{mode edit}} {
 # purpose: set the value to .insert 's edit value frame
 #========================================================
 
-proc insert_value_update {value} {
+proc insert_value_update {value {raw}} {
 	# global TREE tlvdata p columnID sel_type sel_child sel_subtype
 	global p
 	switch $::set_gui_type {
 		"snmp" {
+		puts raw=$raw
+		set zzz [binary format H* $raw]
+		::asn::asnGetSequence zzz zzz
+		::asn::asnGetObjectIdentifier zzz oid
 			$p.fr_s.en_o delete 0 end
 			$p.fr_s.en_v delete 0 end
-			$p.fr_s.en_o insert end [lindex $value 0]
-			$p.fr_s.en_v insert end [lindex $value 2]
-			regexp {\((.+)\)} [lindex $value 1] match typename
+			$p.fr_s.en_o insert end [join $oid .]
+			$p.fr_s.en_v insert end [lindex $value end]
+			regexp {\((.+)\)} [lindex $value end-1] match typename
 			set ::insert_s_type $typename
 		}
 		"file" {

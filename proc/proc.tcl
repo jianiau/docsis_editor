@@ -79,6 +79,9 @@ proc build_tree {val {parent "."} {node root}} {
 		if {$tt==11} {
 			foreach {oid type value} $vv {}
 			set vv "$oid \($type\) $value"
+			set vv "[string trim [snmp_translate -OXs $oid] \{\}] \($type\) $value"
+			puts $oid
+			puts [snmp_translate -OXs $oid]
 		}
 		# store data in hex mode
 		binary scan $ret H* hexvalue		

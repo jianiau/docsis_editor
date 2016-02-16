@@ -143,6 +143,7 @@ puts -------------
 			binary scan [::asn::asnSequence $data] H* ndata
 			set nleng [expr [string length $ndata]/2]
 			set ntext "$::insert_s_oid \($::insert_s_type\) $::insert_s_val"
+			set ntext "[string trim [snmp_translate -OXs $::insert_s_oid] \{\}] \($::insert_s_type\) $::insert_s_val"
 			return 1
 		}
 		"text" {

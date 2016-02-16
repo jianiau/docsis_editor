@@ -15,6 +15,9 @@ package require md5
 package require asn
 package require ip
 package require tkdnd
+package require netsnmptcl
+
+snmp_loadmib -mall -M$env(MIBDIRS)
 
 image create photo logo -file [file join $rootpath editor.png]
 wm iconphoto . -default logo
